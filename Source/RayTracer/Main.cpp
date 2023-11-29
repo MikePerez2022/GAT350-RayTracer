@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 	Renderer renderer;
 	renderer.initialize();
 	renderer.CreateWindow("Ray Tracer", 400, 300);
+	Canvas canvas(400, 300, renderer);
 
 	seedRandom((glm::uint)time(nullptr));
 	
@@ -35,6 +36,12 @@ int main(int argc, char* argv[])
 			}
 			break;
 		}
+
+		canvas.Clear({ 0, 0, 0, 1 });
+		for (int i = 0; i < 1000; i++) canvas.DrawPoint({random(1, 400), random(1, 400)}, {random01(), random01(), random01(), 1});
+		canvas.Update();
+
+		renderer.PresentCanvas(canvas);
 
 	}
 

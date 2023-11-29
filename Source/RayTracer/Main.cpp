@@ -1,5 +1,8 @@
 #include "Renderer.h"
+#include "Random.h"
+#include "Color.h"
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -11,6 +14,8 @@ int main(int argc, char* argv[])
 	renderer.initialize();
 	renderer.CreateWindow("Ray Tracer", 400, 300);
 
+	seedRandom((glm::uint)time(nullptr));
+	
 	bool quit = false;
 	while (!quit)
 	{
@@ -21,7 +26,16 @@ int main(int argc, char* argv[])
 		case SDL_QUIT:
 			quit = true;
 			break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+				quit = true;
+				break;
+			}
+			break;
 		}
+
 	}
 
 	renderer.Shutdown();

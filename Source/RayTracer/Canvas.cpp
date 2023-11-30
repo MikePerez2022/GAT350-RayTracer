@@ -11,13 +11,13 @@ Canvas::Canvas(int width, int height, const Renderer& renderer)
 
 Canvas::~Canvas()
 {
-	if (m_texture) SDL_DestroyTexture(m_texture);
+	if (!m_texture) SDL_DestroyTexture(m_texture);
 }
 
 void Canvas::Update()
 {
 	// set texture with buffer rgba_t data
-	SDL_UpdateTexture(m_texture, nullptr,m_buffer.data(), m_size.x * sizeof(rgba_t));
+	SDL_UpdateTexture(m_texture, nullptr, m_buffer.data(), m_size.x * sizeof(rgba_t));
 }
 
 void Canvas::Clear(const color4_t& color)
@@ -28,6 +28,6 @@ void Canvas::Clear(const color4_t& color)
 
 void Canvas::DrawPoint(const glm::ivec2& point, const color4_t& color)
 {
-	if (point.x < 0 || point.y < 0 || point.x >= m_size.x || point.y >= m_size.y) return;
+	if (point.x == 0 || point.y == 0 || point.x >= m_size.x || point.y >= m_size.y) return;
 	m_buffer[point.x + (point.y * m_size.x)] = ColorToRGBA(color);
 }

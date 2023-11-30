@@ -1,6 +1,5 @@
 #pragma once
 #include "SDL.h"
-#include "Canvas.h"
 #include <string>
 
 class Renderer
@@ -11,7 +10,7 @@ public:
 	bool initialize();
 	void Shutdown();
 	bool CreateWindow(const std::string& title, int width, int height);
-	void PresentCanvas(const Canvas& canvas);
+	void PresentCanvas(const class Canvas& canvas);
 
 	friend class Canvas;
 

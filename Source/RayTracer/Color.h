@@ -5,7 +5,7 @@
 
 using color3_t = glm::vec3;
 using color4_t = glm::vec4;
-using rgba_t = glm::uint32;
+using rgba_t = glm::uint32_t;
 
 inline color4_t RGBAToColor(const rgba_t& rgba)
 {
@@ -28,5 +28,5 @@ inline rgba_t ColorToRGBA(const color4_t& color)
 	int alpha = (int)(std::round(color.a * 255));
 
 	//make rgba with the bits in the right places and return it
-	return rgba_t((red << 24) + (green << 16) + (blue << 8) + alpha);
+	return rgba_t((red << 24) | (green << 16) | (blue << 8) | alpha);
 }

@@ -3,6 +3,8 @@
 #include "Color.h"
 #include "Canvas.h"
 #include "Scene.h"
+#include "Material.h"
+#include "Sphere.h"
 #include <iostream>
 #include <time.h>
 
@@ -22,6 +24,17 @@ int main(int argc, char* argv[])
 
 	Scene scene;
 	scene.SetCamera(camera);
+
+	// create material
+	auto material = std::make_shared<Lambertian>(color3_t{ 0, 0, 1 });
+
+	// create objects -> add to scene
+	for (int i = 0; i < 10; i++)
+	{
+		auto sphere = std::make_unique<Sphere>(glm::vec3{random(-10, 20),random(-10, 20),random(-50,-10)}, random(1, 5), material);
+		scene.AddObject(std::move(sphere));
+	}
+		
 
 	seedRandom((glm::uint)time(nullptr));
 	

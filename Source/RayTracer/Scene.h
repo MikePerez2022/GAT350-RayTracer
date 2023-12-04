@@ -3,6 +3,7 @@
 #include "Camera.h"
 #include "Color.h"
 #include "Canvas.h"
+#include "Object.h"
 #include <memory>
 
 class Scene
@@ -15,13 +16,15 @@ public:
 	{}
 
 	void Render(class Canvas& canvas);
-	color3_t Trace(const ray_t& ray);
+	color3_t Trace(const ray_t& ray, float minDistance, float maxDistance, raycastHit_t& raycastHit);
+	void AddObject(std::unique_ptr<Object> object) { m_objects.push_back(std::move(object)); }
 
 	void SetCamera(std::shared_ptr<Camera> camera) { m_camera = camera; }
 
 private:
+	std::vector<std::unique_ptr<Object>> m_objects;
 	std::shared_ptr<Camera> m_camera;	
 
-	color3_t m_topColor{ 0 };
-	color3_t m_bottomColor{ 1 };
+	color3_t m_topColor{ 1 };
+	color3_t m_bottomColor{ 0 };
 };

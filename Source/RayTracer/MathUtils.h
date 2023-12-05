@@ -14,10 +14,16 @@ inline glm::vec3 cross(const glm::vec3& v1, const glm::vec3& v2)
 
 inline float dot(const glm::vec3& v1, const glm::vec3& v2)
 {
-	return glm::dot(v1, v2); //(v1.x * v2.x) + (v1.y * v2.y) + (v1.z + v2.z);// 
+	return glm::dot(v1, v2); //(v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);//
 }
 
 inline float angle(const glm::vec3& v1, const glm::vec3& v2)
 {
-	return glm::acos(dot(v1, v2));//could be cross instead
+	return glm::acos(dot(v1, v2));
+}
+
+inline glm::vec3 reflect(const glm::vec3& v, const glm::vec3& n)
+{
+	
+	return glm::reflect(v, n);//v - 2.0f * dot(n,v) * n;//v - (n * dot(n, v)) * 2.0f//
 }

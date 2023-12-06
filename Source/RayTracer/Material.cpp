@@ -4,7 +4,7 @@
 bool Lambertian::Scatter(const ray_t& ray, const raycastHit_t& raycastHit, color3_t& color, ray_t& scattered) const
 {
     glm::vec3 target = raycastHit.point + raycastHit.normal + randomInUnitSphere();
-    glm::vec3 direction = glm::normalize(raycastHit.point - target);// <create a direction from raycast hit point to the target and normalize it>;
+    glm::vec3 direction = glm::normalize(target - raycastHit.point);// <create a direction from raycast hit point to the target and normalize it>;
 
     scattered = ray_t(raycastHit.point, direction);// <set scattered ray with raycast hit point as the origin and the new direction>;
     color = m_albedo;// <set color to material albedo>;

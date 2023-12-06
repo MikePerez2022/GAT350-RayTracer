@@ -27,6 +27,6 @@ private:
 	std::shared_ptr<Camera> m_camera;	
 
 	color3_t m_topColor{ 1 };
-	color3_t m_bottomColor{ 0.2f };
+	color3_t m_bottomColor{ 0 };
 	int m_depth{ 5 };
 };

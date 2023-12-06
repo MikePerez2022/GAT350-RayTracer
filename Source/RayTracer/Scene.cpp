@@ -1,5 +1,7 @@
 #include "Scene.h"
 #include "MathUtils.h"
+#include <iostream>
+#include <iomanip>
 
 void Scene::Render(Canvas& canvas, int numSamples)
 {
@@ -28,12 +30,13 @@ void Scene::Render(Canvas& canvas, int numSamples)
 				// cast ray into scene
 				// add color value from trace
 				raycastHit_t raycastHit;
-				color += Trace(ray, 15, 100, raycastHit, m_depth);
+				color += Trace(ray, 0, 100, raycastHit, m_depth);
 			}
 			// draw color to canvas point (pixel)
 			color = color / glm::vec3((float)numSamples);
 			canvas.DrawPoint(pixel, color4_t(color, 1));
 		}
+		std::cout << std::setprecision(2) << std::setw(5) << (y / canvas.GetSize().x * 100) << "%\n";
 	}
 }
 
@@ -67,9 +70,9 @@ color3_t Scene::Trace(const ray_t& ray, float minDistance, float maxDistance, ra
 			return color * Trace(scattered, minDistance, maxDistance, raycastHit, depth - 1);
 		}
 		else
-		{
-			// reached maximum depth of bounces (color is black)
-			return color3_t{ 0, 0, 0 };
+		{			
+			// reached maximum depth of bounces (get emissive color, will be black except for Emissive materials)
+			return raycastHit.material->GetEmissive();
 		}
 	}
 

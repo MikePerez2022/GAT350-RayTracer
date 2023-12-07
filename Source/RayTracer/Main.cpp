@@ -19,8 +19,8 @@ int main(int argc, char* argv[])
 
 	const int width = 400;
 	const int height = 300;
-	const int samples = 50;
-	const int depth = 10;
+	const int samples = 20;
+	const int depth = 8;
 
 	Renderer renderer;
 	renderer.initialize();
@@ -28,27 +28,29 @@ int main(int argc, char* argv[])
 	Canvas canvas(width, height, renderer);
 
 	float aspectRatio = canvas.GetSize().x / (float)canvas.GetSize().y;
-	std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 2, 10 }, glm::vec3{ 0, 1, 0 }, glm::vec3{ 0, 1, 0 }, 20.0f, aspectRatio);
-	//std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 1, 10 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, 20.0f, aspectRatio);
+	//std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 2, 10 }, glm::vec3{ 0, 1, 0 }, glm::vec3{ 0, 1, 0 }, 20.0f, aspectRatio);
+	//std::shared_ptr<Camera> camera = std::make_shared<Camera>(glm::vec3{ 0, 1, 20 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, 25.0f, aspectRatio);
 
-	Scene scene(glm::vec3{ 1.0f }, glm::vec3{ 0.5f, 0.7f, 1.0f });
-	scene.SetCamera(camera);
+	Scene scene(glm::vec3{ 0.0f }, glm::vec3{ 0.5f, 0.7f, 1.0f });
+	//scene.SetCamera(camera);
+
+	scene.InitScene01(scene, canvas);
 
 	// create material
 	//for (int x = -10; x < 10; x++)
 	//{
 	//	for (int z = -10; z < 10; z++)
 	//	{
-
+	//
 	//		std::shared_ptr<Material> material;
-
+	//
 	//		// create random material
 	//		float r = random01();
 	//		if (r < 0.3f)		material = std::make_shared<Lambertian>(glm::rgbColor(glm::vec3{ random(0, 360), 1.0f, 1.0f }));
 	//		else if (r < 0.6f)	material = std::make_shared<Metal>(color3_t{ random(0.5f, 1.0f) }, random(0, 0.5f));
 	//		else if (r < 0.9f)	material = std::make_shared<Dielectric>(color3_t{ 1.0f }, random(1.1f, 2));
 	//		else				material = std::make_shared<Emissive>(glm::rgbColor(glm::vec3{ random(0, 360), 1.0f, 1.0f }), 5.0f);
-
+	//
 	//		// set random sphere radius
 	//		float radius = random(0.2f, 0.3f);
 	//		// create sphere using random radius and material
@@ -58,13 +60,37 @@ int main(int argc, char* argv[])
 	//	}
 	//}
 
-	auto mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0, 0, 1 }));
-	mesh->Load("Models/cube.obj", glm::vec3{ 0, 0.5f, 0 }, glm::vec3{ 0, 45, 0 });
+	/*auto mesh = std::make_unique<Mesh>(std::make_shared<Emissive>(color3_t{ 1, 1, 1 }, 5.0f));
+	mesh->Load("Models/cube.obj", glm::vec3{ 0, 1.7f, 6.5f }, glm::vec3{ 5, 0, 0 }, glm::vec3{ 0.4f, 0.4f, 0.4f });
 	scene.AddObject(std::move(mesh));
 
-	auto material = std::make_shared<Lambertian>(color3_t{ 0.2f });
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
+	mesh->Load("Models/quad.obj", glm::vec3{ 0, 1.4f, 5 }, glm::vec3{ 85, 0, 0 }, glm::vec3{6,5,1});
+	scene.AddObject(std::move(mesh));
+
+	mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
+	mesh->Load("Models/quad.obj", glm::vec3{ 0, 0.5f, 4 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 5, 2.1f, 1 });
+	scene.AddObject(std::move(mesh));*/
+
+	//mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
+	//mesh->Load("Models/quad.obj", glm::vec3{ 0, 0.5f, 12 }, glm::vec3{ 0, 0, 0 }, glm::vec3{ 5, 2.1f, 1 });
+	//scene.AddObject(std::move(mesh));
+
+	//mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 0, 0 }));
+	//mesh->Load("Models/quad.obj", glm::vec3{ -1.0f, 0.5f, 5 }, glm::vec3{ 0, 90, 0 }, glm::vec3{ 7, 3.1f, 1 });
+	//scene.AddObject(std::move(mesh));
+
+	/*mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 0, 1, 0 }));
+	mesh->Load("Models/quad.obj", glm::vec3{ 1.0f, 0.5f, 5 }, glm::vec3{ 0, -90, 0 }, glm::vec3{ 7, 3.1f, 1 });
+	scene.AddObject(std::move(mesh));*/
+
+	/*mesh = std::make_unique<Mesh>(std::make_shared<Lambertian>(color3_t{ 1, 1, 1 }));
+	mesh->Load("Models/quad.obj", glm::vec3{ 0, -0.4f, 5 }, glm::vec3{ -85, 0, 0 }, glm::vec3{ 6,5,1 });
+	scene.AddObject(std::move(mesh));*/
+
+	/*auto material = std::make_shared<Lambertian>(color3_t{ 1 });
 	auto plane = std::make_unique<Plane>(glm::vec3{ 0, 0, 0 }, glm::vec3{ 0, 1, 0 }, material);
-	scene.AddObject(std::move(plane));
+	scene.AddObject(std::move(plane));*/
 
 	seedRandom((glm::uint)time(nullptr));
 
